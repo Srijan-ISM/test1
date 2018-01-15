@@ -1,0 +1,20 @@
+HEAD /profile_images/946389438090891265/MIakVOdB.jpg
+host: pbs.twimg.com
+
+HTTP/1.1 200 OK
+accept-ranges: bytes
+access-control-allow-origin: *
+access-control-expose-headers: Content-Length
+cache-control: max-age=604800, must-revalidate
+content-type: image/jpeg
+date: Sun, 14 Jan 2018 12:07:51 GMT
+last-modified: Thu, 28 Dec 2017 14:34:39 GMT
+server: ECS (maa/AEAA)
+surrogate-key: profile_images profile_images/bucket/2 profile_images/946389438090891265
+x-cache: HIT
+x-connection-hash: 751d54faff1a7b808ee6c57aae9aa705
+x-content-type-options: nosniff
+x-response-time: 377
+content-length: 12302
+connection: close
+

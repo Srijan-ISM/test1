@@ -1,0 +1,19 @@
+HEAD /
+host: www.google.co.in
+
+HTTP/1.1 200 OK
+date: Mon, 15 Jan 2018 17:10:27 GMT
+expires: -1
+cache-control: private, max-age=0
+content-type: text/html; charset=ISO-8859-1
+p3p: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+server: gws
+x-xss-protection: 1; mode=block
+x-frame-options: SAMEORIGIN
+set-cookie: 1P_JAR=2018-01-15-17; expires=Wed, 14-Feb-2018 17:10:27 GMT; path=/; domain=.google.co.in
+set-cookie: NID=121=rOs8T1DpHamH7FvYupWSNcNII-_89Jrd66OD5szBymITmWvG7S_VJ2V6CW2MayoX0LcbqqOy7rHx-IHYb7jPJmWhUnr0_3UrynI3V1vKsaJ9bXd7fBH-N24a3nvlPzGh; expires=Tue, 17-Jul-2018 17:10:27 GMT; path=/; domain=.google.co.in; HttpOnly
+alt-svc: hq=":443"; ma=2592000; quic=51303431; quic=51303339; quic=51303338; quic=51303337; quic=51303335,quic=":443"; ma=2592000; v="41,39,38,37,35"
+accept-ranges: none
+vary: Accept-Encoding
+connection: close
+

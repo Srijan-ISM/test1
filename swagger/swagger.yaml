@@ -1,0 +1,209 @@
+---
+swagger: '2.0'
+info:
+  description: A Node backend application for socialcops.
+  version: 1.0.0
+  title: Socialcops Backend APIs
+host: localhost:3000
+basePath: "/"
+schemes:
+- http
+- https
+tags:
+  - name: User
+    description: User login
+  - name: Image
+    description: Image
+  - name: Patch
+    description: JSON patch
+securityDefinitions:
+  Bearer:
+    description: Example value:- Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5MmQwMGJhNTJjYjJjM
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  "/login":
+    post:
+      tags:
+      - User
+      summary: User login
+      description: API to login the user
+      operationId: userLogin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: userCredentials
+        description: user credentials to login
+        required: true
+        schema:
+          "$ref": "#/definitions/UserLoginCredentials"
+      responses:
+        '201':
+          description: Login successful.
+          schema:
+            "$ref": "#/definitions/UserDetails"
+        '400':
+          description: Bad Request - Missing parameters.
+        '403':
+          description: Wrong credentials.
+        '500':
+          description: Internal Server Error
+  "/patch":
+    patch:
+      tags:
+      - Patch
+      summary: JSON Patch
+      description: API to patch
+      operationId: patch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - Bearer: []
+      parameters:
+      - in: body
+        name: patchRequest
+        description: JSON patch body
+        required: true
+        schema:
+          "$ref": "#/definitions/PatchRequest"
+      responses:
+        '200':
+          description: Login successful.
+          schema:
+            "$ref": "#/definitions/PatchResponse"
+        '400':
+          description: Bad Request - Missing parameters.
+        '401':
+          description: Unauthorized.
+        '500':
+          description: Internal Server Error
+  "/thumbnail":
+    put:
+      tags:
+      - Image
+      summary: Image thumbnail
+      description: API to get thumbnail of image
+      operationId: imageThumbnail
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - Bearer: []
+      parameters:
+      - in: body
+        name: imageRequest
+        description: image
+        required: true
+        schema:
+          "$ref": "#/definitions/ImageRequest"
+      responses:
+        '200':
+          description: Login successful.
+          schema:
+            "$ref": "#/definitions/ImageResponse"
+        '400':
+          description: Bad Request - Missing parameters.
+        '401':
+          description: Unauthorized.
+        '500':
+          description: Internal Server Error
+definitions:
+  UserLoginCredentials:
+    type: object
+    required:
+    - user
+    - password
+    properties:
+      user:
+        type: string
+        example: test user
+      password:
+        type: string
+  UserDetails:
+    type: object
+    required:
+    - userId
+    - email
+    properties:
+      userId:
+        type: integer
+        example: 101
+      email:
+        type: string
+        format: email
+        example: test@yopmail.com
+  PatchRequest:
+    type: object
+    required:
+    - doc
+    - patch
+    properties:
+      doc:
+        type: object
+        example:
+          baz: qux
+          foo: bar
+      patch:
+        type: array
+        items:
+          type: object
+          required:
+          - op
+          - path
+          - value
+          properties:
+            op:
+              type: string
+              example: replace
+            path:
+              type: string
+              example: /baz
+            value:
+              type: string
+              example: boo
+  PatchResponse:
+    type: object
+    example:
+      baz: boo
+      foo: bar
+    type: object
+    required:
+    - type
+    - status
+    - emailMessage
+    properties:
+      type:
+        type: string
+        enum:
+        - enrol
+        - verify
+      items:
+        type: string
+        enum:
+        - pending
+        - success
+        - fail
+      emailMessage:
+        type: string
+        example: "Please verify yourself to use the service"
+  ImageRequest:
+    type: object
+    required:
+    - url
+    properties:
+      url:
+        type: string
+        example: 'https://sampleimages.com/img1.png'
+  ImageResponse:
+    content:
+      image/png:
+        schema:
+          type: string
+          format: binary
